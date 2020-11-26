@@ -7,14 +7,15 @@ using namespace std;
 // ~ Mark Gainan ~ CS 210 ~ Project 2 ~
 
 // interest calculator function
-void interestCalculator(double investmentAmount, double monthlyDep, int numYears) {
-    double interestRate = 0.05;
+void interestCalculator(double investmentAmount, double monthlyDep, double interestRate, double numYears) {
     double finalTotal;
     double numMonths = numYears * 12;
-    finalTotal = investmentAmount * (1 + 5/100) * numMonths;
+    finalTotal = (investmentAmount + monthlyDep) * ((interestRate/100)/12);
+    double reallyFinal = finalTotal + investmentAmount + monthlyDep;
     // FIXME this math is very wrong
     cout << "~ wrapping up coding for tonight FIXME tomorrow ~" << endl;
-    cout << "Your investment of $" << investmentAmount << " will be worth $" << finalTotal << " After " << numMonths << " months." << endl;
+    cout << "Your investment of $" << investmentAmount << " will be worth $" << reallyFinal << " After " << numMonths << " months." << endl;
+   
 
 }
 
@@ -23,8 +24,8 @@ void printHomeScreen() {
     double invAmount;
     double monthlyDeposit;
     // this interest variable is for display purposes only so I'm just using an int set to 5 a double will be used in the math function
-    int annualInterest = 5;
-    int numYears;
+    double annualInterest;
+    double numYears;
 
     // store app title as variable for re-usable code
     string appTitle = " Data Input ";
@@ -34,9 +35,10 @@ void printHomeScreen() {
     // print out options and then accept user input
     cout << "Initial Investment Amount:" << endl;
     cout << "Monthly Deposit:" << endl;
+    cout << "Annual Interest: " << endl;
     cout << "Number of years:" << endl;
     cout << "please type in values and press enter. . ." << endl;
-    cin >> invAmount >> monthlyDeposit >> numYears;
+    cin >> invAmount >> monthlyDeposit >> annualInterest >>  numYears;
 
     // print out user input data as stated
      // print decorative header 
@@ -50,14 +52,15 @@ void printHomeScreen() {
     cout << "Press any key to continue . . ." << endl;
     // FIXME: set up a trigger for the interestCalculator function
     // add interest calculator function 
+    interestCalculator(invAmount, monthlyDeposit, annualInterest, numYears);
     
 
 }
 
 // main function
 int main() {
-//printHomeScreen();
-interestCalculator(50.00, 50.00, 3);
+printHomeScreen();
+
 
 return 0;
 
