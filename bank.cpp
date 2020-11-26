@@ -49,6 +49,7 @@ void printHomeScreen() {
     cout << "Number of years: " << numYears << endl;
     cout << "Press any key to continue . . ." << endl;
     // FIXME: set up a trigger for the interestCalculator function
+    // add interest calculator function 
     
 
 }
