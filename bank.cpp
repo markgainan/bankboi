@@ -119,7 +119,6 @@ int main() {
     cout.precision(2);
     // call printHomeScreen() function
     printHomeScreen();
-    //interestCalculator(100,10,7,5);
     return 0;
 
 }
