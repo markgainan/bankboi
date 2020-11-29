@@ -31,20 +31,15 @@ void printReportHeader(char choice) {
 void interestCalculator(double investmentAmount, double monthlyDep, double interestRate, double numYears) {
     // spacer variable to space out fields
     string spacer = string(17, ' ');
-    double currentValue;
-    // interest earned per month
+    // interest earned
     double interestEarned;
-    
-    
-    
-    
     // set current value as initial investment to start the loop
+    double currentValue;
     currentValue = investmentAmount;
 
     
     // print header for report A
     printReportHeader('a');
-    
     // loop for report A
     for (int i = 0; i < numYears; ++i) {
         interestEarned = currentValue * (interestRate/100);
@@ -52,9 +47,9 @@ void interestCalculator(double investmentAmount, double monthlyDep, double inter
         cout << i + 1 << spacer << "$" << currentValue << spacer << "$" << interestEarned << endl;
         cout << endl;
     }
+
     // print header for report B
     printReportHeader('b');
-    
     // reset current value to initial investment
     currentValue = investmentAmount;
     // loop for report B
@@ -64,19 +59,21 @@ void interestCalculator(double investmentAmount, double monthlyDep, double inter
         currentValue = currentValue + interestEarned;
         cout << i + 1 << spacer << "$" << currentValue << spacer << "$" << interestEarned << endl;
         cout << endl;
-
     }
    
 
 }
 
-// print home screen function
+// print homescreen function
 void printHomeScreen() {
+    // investment amount
     double invAmount;
     double monthlyDeposit;
-    // this interest variable is for display purposes only so I'm just using an int set to 5 a double will be used in the math function
     double annualInterest;
+    // number of years
     double numYears;
+    // char variable for users choice (continue or exit)
+    char userChoice;
 
     // store app title as variable for re-usable code
     string appTitle = " Data Input ";
@@ -92,7 +89,7 @@ void printHomeScreen() {
     cin >> invAmount >> monthlyDeposit >> annualInterest >>  numYears;
 
     // print out user input data as stated
-     // print decorative header 
+    // print decorative header 
     cout << string(40, '*') << endl;
     cout << string(14, '*') << appTitle << string(14, '*') << endl;
     // print out options and then accept user input
@@ -101,9 +98,15 @@ void printHomeScreen() {
     cout << "Annual Interest: " << annualInterest << "%" << endl;
     cout << "Number of years: " << numYears << endl;
     cout << "Press any key to continue (Press X to exit) . . ." << endl;
-    // FIXME: set up a trigger for the interestCalculator function
-    // add interest calculator function 
+    // await user input
+    cin >> userChoice;
+    // either call the interest calculator function using their answers, or exit based on answer
+    if (userChoice != 'X') {
     interestCalculator(invAmount, monthlyDeposit, annualInterest, numYears);
+    }
+    else if (userChoice == 'X') {
+        cout << "Exiting program. Have a great day!" << endl;
+    }
     
 
 }
@@ -114,8 +117,9 @@ int main() {
     cout.setf(ios::fixed);
     cout.setf(ios::showpoint);
     cout.precision(2);
-//printHomeScreen();
-interestCalculator(100,10,7,5);
-return 0;
+    // call printHomeScreen() function
+    printHomeScreen();
+    //interestCalculator(100,10,7,5);
+    return 0;
 
 }
