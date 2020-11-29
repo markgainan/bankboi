@@ -6,13 +6,35 @@ using namespace std;
 
 // ~ Mark Gainan ~ CS 210 ~ Project 2 ~
 
+
+void printReportHeader(char choice) {
+// function to print headers for both reports that accepts report choice (a or b) as a parameter for with/without monthly deposits
+    if (choice == 'a') {
+        cout << "   Balance and Interest Without Additional Monthly Deposits  " << endl;
+        cout << string(70, '=') << endl;
+        cout << "    Year        " << "Year End Balance       " << "Year End Earned Interest" << endl;
+        cout << string(70, '-') << endl;
+    }
+    else if (choice == 'b') {
+        cout << "      Balance and Interest With Additional Monthly Deposits  " << endl;
+        cout << string(70, '=') << endl;
+        cout << "    Year        " << "Year End Balance       " << "Year End Earned Interest" << endl;
+        cout << string(70, '-') << endl;
+    
+    }
+    else {
+        cout << "You can only use this function with a or b" << endl;
+    }
+}
+
 // interest calculator function
 void interestCalculator(double investmentAmount, double monthlyDep, double interestRate, double numYears) {
+    // spacer variable to space out fields
+    string spacer = string(17, ' ');
     double currentValue;
     // interest earned per month
     double interestEarned;
-    // spacer variable to space out fields
-    string spacer = string(30, ' ');
+    
     
     
     
@@ -21,22 +43,27 @@ void interestCalculator(double investmentAmount, double monthlyDep, double inter
 
     
     // print header for report A
+    printReportHeader('a');
     
     // loop for report A
     for (int i = 0; i < numYears; ++i) {
         interestEarned = currentValue * (interestRate/100);
         currentValue = currentValue + interestEarned;
         cout << i + 1 << spacer << "$" << currentValue << spacer << "$" << interestEarned << endl;
+        cout << endl;
     }
     // print header for report B
-    // loop for report B
+    printReportHeader('b');
+    
     // reset current value to initial investment
     currentValue = investmentAmount;
+    // loop for report B
     for (int i = 0; i < numYears; ++i) {
         currentValue = currentValue + (monthlyDep * 12);
         interestEarned = currentValue * (interestRate/100);
         currentValue = currentValue + interestEarned;
         cout << i + 1 << spacer << "$" << currentValue << spacer << "$" << interestEarned << endl;
+        cout << endl;
 
     }
    
@@ -73,7 +100,7 @@ void printHomeScreen() {
     cout << "Monthly Deposit: " << "$" << monthlyDeposit << endl;
     cout << "Annual Interest: " << annualInterest << "%" << endl;
     cout << "Number of years: " << numYears << endl;
-    cout << "Press any key to continue . . ." << endl;
+    cout << "Press any key to continue (Press X to exit) . . ." << endl;
     // FIXME: set up a trigger for the interestCalculator function
     // add interest calculator function 
     interestCalculator(invAmount, monthlyDeposit, annualInterest, numYears);
@@ -88,9 +115,6 @@ int main() {
     cout.setf(ios::showpoint);
     cout.precision(2);
 //printHomeScreen();
-//printReportHeader('a');
-
-//printReportHeader('b');
 interestCalculator(100,10,7,5);
 return 0;
 
