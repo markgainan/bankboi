@@ -8,25 +8,35 @@ using namespace std;
 
 // interest calculator function
 void interestCalculator(double investmentAmount, double monthlyDep, double interestRate, double numYears) {
-    double interestEarned;
-    interestEarned = (investmentAmount + monthlyDep) * ((interestRate/100)/12);
     double currentValue;
-    // set current value as initial investment plus monthly deposit to start the loop
+    // interest earned per month
+    double interestEarned;
+    // spacer variable to space out fields
+    string spacer = string(30, ' ');
+    
+    
+    
+    // set current value as initial investment to start the loop
     currentValue = investmentAmount;
+
+    
     // print header for report A
     
     // loop for report A
     for (int i = 0; i < numYears; ++i) {
-        currentValue = currentValue + (interestEarned * 12);
-        cout << i + 1 << "\t\t\t" << "$" << currentValue << "\t\t\t\t\t" << "$" << interestEarned << endl;
+        interestEarned = currentValue * (interestRate/100);
+        currentValue = currentValue + interestEarned;
+        cout << i + 1 << spacer << "$" << currentValue << spacer << "$" << interestEarned << endl;
     }
-    
+    // print header for report B
     // loop for report B
-    // reset current value to beginning amount
-    currentValue = investmentAmount + monthlyDep;
+    // reset current value to initial investment
+    currentValue = investmentAmount;
     for (int i = 0; i < numYears; ++i) {
-        currentValue = currentValue + (interestEarned * 12) + (monthlyDep * 12);
-        cout << i + 1 << "\t\t\t" << "$" << currentValue << "\t\t\t\t\t" << "$" << interestEarned << endl;
+        currentValue = currentValue + (monthlyDep * 12);
+        interestEarned = currentValue * (interestRate/100);
+        currentValue = currentValue + interestEarned;
+        cout << i + 1 << spacer << "$" << currentValue << spacer << "$" << interestEarned << endl;
 
     }
    
@@ -73,11 +83,15 @@ void printHomeScreen() {
 
 // main function
 int main() {
+    // formatting output to 2 decimal places
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(2);
 //printHomeScreen();
-//printReportHeader('a');ß
+//printReportHeader('a');
 
 //printReportHeader('b');
-interestCalculator(1,0,5,5);
+interestCalculator(100,10,7,5);
 return 0;
 
 }
